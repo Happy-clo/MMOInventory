@@ -10,4 +10,4 @@ wrong-player: '&c找不到名为{arg}的玩家。'
 not-enough-perms: '&c您没有足够的权限。'
 
 # 命令输出
-reload: '&eMMOInventory {version} 成功重新加载。'
+reload: '&e[RPG背包] {version} 成功重新加载。'

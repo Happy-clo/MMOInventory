@@ -2,6 +2,7 @@ package net.Indyuce.inventory.slot;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import io.lumine.mythic.lib.MythicLib;
 import io.lumine.mythic.lib.UtilityMethods;
 import net.Indyuce.inventory.MMOInventory;
 import net.Indyuce.inventory.inventory.InventoryHandler;
@@ -85,12 +86,12 @@ public class CustomSlot {
         this.item = new ItemStack(Material.valueOf(UtilityMethods.enumName(Objects.requireNonNull(config.getString("material"), "Could not read slot material"))));
         ItemMeta meta = item.getItemMeta();
         meta.setCustomModelData(model);
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(config.getString("name"), "Could not read slot name")));
+        meta.setDisplayName( MythicLib.plugin.parseColors(config.getString("name")) );
         meta.addItemFlags(ItemFlag.values());
         List<String> lore = new ArrayList<>();
         for (String line : Objects.requireNonNull(config.getStringList("lore"), "Could not read slot lore"))
             lore.add(ChatColor.GRAY + ChatColor.translateAlternateColorCodes('&', line));
-        meta.setLore(lore);
+        meta.setLore(MythicLib.plugin.parseColors(lore));
         meta.setUnbreakable(true);
         meta.getPersistentDataContainer().set(new NamespacedKey(MMOInventory.plugin, "GuiItemId"), PersistentDataType.STRING, getId());
         if (config.contains("texture-value"))
